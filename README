@@ -1,0 +1,4 @@
+PasswordGenerator checks the user's password and assesses it's strength
+->Recommends a stronger password
+->Asks if they want a new password
+->If yes, generates a new password

@@ -76,11 +76,11 @@ public class PasswordGenerator{
         return "Strong Password";
     }
     public static boolean checkInput(String userInput){
-        if(userInput == "Y" || userInput == "Yes" || userInput == "y" || userInput == "yes"){
+        if(userInput.equals("Y")){
             System.out.println(generatePassword(12));
             return true;
         }
-        else if(userInput == "N" || userInput == "No" || userInput == "n" || userInput == "no"){
+        else if(userInput.equals("N")){
             System.out.println("Thank you, have a great day!");
             return true;
         }
@@ -95,9 +95,15 @@ public class PasswordGenerator{
         System.out.println(checkPassword(userPassword));
         System.out.println("Would you like a new password? (Y/N)");
         String userInput = scanner.nextLine();
-        if(!checkInput(userInput)){
-
-        }
+        boolean check = checkInput(userInput);
+            while(!check){
+            userInput = scanner.nextLine();
+            if(checkInput(userInput)){
+                break;
+            }else{
+                continue;
+            }
+            }
         scanner.close();
     }
 }
