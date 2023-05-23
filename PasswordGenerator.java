@@ -36,9 +36,68 @@ public class PasswordGenerator{
         
         return password.toString();
     }
+    public static String checkPassword(String userPassword){
+        if(userPassword.length()<8){
+            return "Password too short";
+        }
+        if(userPassword.length()>16){
+            return "Password too long";
+        }
+        int numCount = 0;
+        int uppercaseCount = 0;
+        int lowercaseCount = 0;
+        int specialCount = 0;
+        for(int i =0; i<userPassword.length(); i++){
+            if(UPPERCASE_CHARACTERS.indexOf(userPassword.charAt(i))==-1){
+                uppercaseCount++;
+            }
+            else if(LOWERCASE_CHARACTERS.indexOf(userPassword.charAt(i))==-1){
+                lowercaseCount++;
+            }
+            else if(NUMBERS.indexOf(userPassword.charAt(i))==-1){
+                numCount++;
+            }
+            else if(SPECIAL_CHARACTERS.indexOf(userPassword.charAt(i))==-1){
+                specialCount++;
+            }
+        }
+        if(specialCount<1){
+            return "Needs special characters";
+        }
+        if(numCount<1){
+            return "Needs numbers";
+        }
+        if(lowercaseCount<1){
+            return "Needs lowercase characters";
+        }
+        if(uppercaseCount<1){
+            return "Needs uppercase characters";
+        }
+        return "Strong Password";
+    }
+    public static boolean checkInput(String userInput){
+        if(userInput == "Y" || userInput == "Yes" || userInput == "y" || userInput == "yes"){
+            System.out.println(generatePassword(12));
+            return true;
+        }
+        else if(userInput == "N" || userInput == "No" || userInput == "n" || userInput == "no"){
+            System.out.println("Thank you, have a great day!");
+            return true;
+        }
+        System.out.println("Could not understand input, please try again");
+        return false;
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(generatePassword(12));
+        System.out.println("Please enter a password: ");
+        String userPassword = scanner.nextLine();
+        System.out.println(checkPassword(userPassword));
+        System.out.println("Would you like a new password? (Y/N)");
+        String userInput = scanner.nextLine();
+        if(!checkInput(userInput)){
+
+        }
+        scanner.close();
     }
 }
